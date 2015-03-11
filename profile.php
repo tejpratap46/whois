@@ -34,7 +34,7 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="index.php">Home</a></li>
-                <li class="active"><a href="category.php">Categories</a></li>
+                <li><a href="category.php">Categories</a></li>
                 <li><a href="faces.php">Faces</a></li>
                 <li><a href="contact.php">Contact</a></li>
               </ul>
@@ -45,9 +45,22 @@
       </div>
     </div>
 
-    <div class="notification">Loading...</div>
-    <div class="container marketing show-votes">
-
+    <div class="container marketing">
+    <hr>
+      <div class="row well">
+        <?php
+        error_reporting(0);
+          require ('connection.php');
+          $q = mysql_query("SELECT * FROM faces WHERE name='".$_GET['name']."'");
+          $info = mysql_fetch_array($q);
+          echo '<div class="col-md-4">
+                  <img src="'.$info['image_url'].'" alt="">
+                </div>
+                <div>
+                  <h1>'.$info['name'].'</h1>
+                </div>';
+        ?>
+      </div>
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
@@ -60,13 +73,5 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      $('.notification').stop().show();
-      $(".show-votes").load('ajax/categories.php',{
-      param1: "value1", param2: "value2"} ,
-        function(){
-        $('.notification').stop().hide();
-      });
-    </script>
   </body>
 </html>

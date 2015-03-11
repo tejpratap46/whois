@@ -35,6 +35,7 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="category.php">Categories</a></li>
+                <li><a href="faces.php">Faces</a></li>
                 <li><a href="contact.php">Contact</a></li>
               </ul>
             </div>
@@ -105,14 +106,13 @@
     <div class="container marketing">
     <div class="row well">
       <h1>Some Categories</h1>
-    </div>
       <!-- Three columns of text below the carousel -->
       <div class="row">
       <?php // php for getting 3 categories for home page
       require ('connection.php');
       $q = mysql_query("SELECT id,name FROM category");
       $last = mysql_num_rows($q);
-      $last = min($last,3);
+      $last = min($last,6);
       if ($last == 0) {
         die("No categories available, You can add one too.</h1><a class='btn btn-primary' href='addcategory.php'></a>");
       }
@@ -120,13 +120,15 @@
       echo '<div class="row">';
       for ($i=0; $i < $last; $i++) {
         $info = mysql_fetch_array($q);
-        echo '<div class="col-md-4 well">';
+        echo '<div class="col-md-4 thumbnail">';
         echo '<a href="votes.php?cat='.$info['id'].'"><div class="row center"><div class="col-md-4"><h1>'.($i+1).'</h1></div><div class="col-md-8"><h2>'.$info['name'].'</h2></div></div></a>';
         echo '</div>';
       }
       echo '</div>';
       ?>
-      </div><!-- /.row -->
+      <a href="categoty.php" class="btn btn-primary" style="width: 100%;">Show All</a>
+      </div> <!-- /well -->
+    </div><!-- /.row -->
 
 
       <!-- START THE FEATURETTES -->
@@ -134,20 +136,33 @@
       <?php
       $q = mysql_query("SELECT id,name,query FROM category");
       $last = mysql_num_rows($q);
-      $last = min($last,3);
+      $last = min($last,6);
       for ($i=0; $i < $last; $i++) {
         $info = mysql_fetch_array($q);
         $f = mysql_query($info['query']." LIMIT 1");
         $finfo = mysql_fetch_array($f);
-        echo '<div class="row featurette well">
-              <div class="col-md-7">
+        if ($i % 2 == 0) { // for zig zag view looks cooler
+          echo '<div class="row featurette well">
+              <div class="col-md-8">
                 <h2 class="featurette-heading">'.$finfo['name'].'<span class="text-muted"> Is Best In '.$info['name'].'</span></h2>
                 <a class="btn btn-primary" href="votes.php?cat='.$info['id'].'">Vote Here</a>
               </div>
-              <div class="col-md-5">
-                <img class="featurette-image img-responsive" src="" alt="">
+              <div class="col-md-4">
+                <img style="width: 100%; height: 100%;" class="featurette-image img-responsive" src="'.$finfo['image_url'].'" alt="">
               </div>
             </div>';
+        }else{
+          echo '<div class="row featurette well">
+              <div class="col-md-4">
+                <img style="width: 100%; height: 100%;" class="featurette-image img-responsive" src="'.$finfo['image_url'].'" alt="">
+              </div>
+              <div class="col-md-8">
+                <h2 class="featurette-heading">'.$finfo['name'].'<span class="text-muted"> Is Best In '.$info['name'].'</span></h2>
+                <a class="btn btn-primary" href="votes.php?cat='.$info['id'].'">Vote Here</a>
+              </div>
+            </div>';
+        }
+        
       }
       
       ?>

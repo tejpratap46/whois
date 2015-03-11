@@ -48,7 +48,7 @@
     <hr>
       <div class="well">
         <h1>
-          Someone In the department. But not you.
+          Someone In the department, But not me.
         </h1>
       </div>
       <!-- FOOTER -->

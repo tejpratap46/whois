@@ -35,6 +35,7 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="category.php">Categories</a></li>
+                <li><a href="faces.php">Faces</a></li>
                 <li><a href="contact.php">Contact</a></li>
               </ul>
             </div>
@@ -72,7 +73,7 @@
       $id = $(e.target).attr('id');
       if ($id == 'voteButton') {
           $('.notification').stop().show();
-          var $name = $(e.target).parent().parent().find('.col-md-8 h1').text();
+          var $name = $(e.target).parent().parent().find('.col-md-7 h1').text();
           $(".show-votes").load('ajax/submitvote.php',{
           name: $name, cat: catid} ,
             function(){

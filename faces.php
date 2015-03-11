@@ -34,8 +34,8 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="index.php">Home</a></li>
-                <li class="active"><a href="category.php">Categories</a></li>
-                <li><a href="faces.php">Faces</a></li>
+                <li><a href="category.php">Categories</a></li>
+                <li class="active"><a href="faces.php">Faces</a></li>
                 <li><a href="contact.php">Contact</a></li>
               </ul>
             </div>
@@ -62,7 +62,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $('.notification').stop().show();
-      $(".show-votes").load('ajax/categories.php',{
+      $(".show-votes").load('ajax/faces.php',{
       param1: "value1", param2: "value2"} ,
         function(){
         $('.notification').stop().hide();

@@ -13,10 +13,13 @@ if ($_POST['cat']) {
   for($i=0;$i<mysql_num_rows($q);$i++){
     $items = mysql_fetch_array($q);
     echo '<div class="row alert '.getAlertColor($i).'">
-            <div class="col-md-2">
+            <div class="col-md-1">
               <h1 style="width: 100%; text-align: center;">'.($i+1).'</h1>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-2">
+              <img style="width: 100%; text-align: center;" src="'.$items['image_url'].'" alt="">
+            </div>
+            <div style="text-align: center;" class="col-md-7">
               <h1>'.$items['name'].'</h1>
               <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="'.$items[$cat].'" aria-valuemin="'.$items[$cat].'" aria-valuemax="100" style="width: '.$items[$cat].'%;">
