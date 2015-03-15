@@ -34,7 +34,8 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="index.php">Home</a></li>
-                <li class="active"><a href="category.php">Categories</a></li>
+                <li class="active"><a href="toppers.php">Toppers</a></li>
+                <li><a href="category.php">Categories</a></li>
                 <li><a href="faces.php">Faces</a></li>
                 <li><a href="contact.php">Contact</a></li>
               </ul>
@@ -61,20 +62,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
-      var order = getParameterByName('order');
       $('.notification').stop().show();
-      $(".show-votes").load('ajax/categories.php',{
-      order: order, param2: "value2"} ,
+      $(".show-votes").load('ajax/toppers.php',{
+      param1: "value1", param2: "value2"} ,
         function(){
         $('.notification').stop().hide();
       });
-
-      function getParameterByName(name) {
-      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-          results = regex.exec(location.search);
-      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-      }
     </script>
   </body>
 </html>

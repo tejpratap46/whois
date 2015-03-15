@@ -4,11 +4,12 @@ require '../connection.php';
 if ($_POST['cat']) {
   $cat = $_POST['cat'];
   $query = mysql_query("SELECT query,name FROM category WHERE id='".$cat."'") or die("<h1>No list for this category</h1>");
+  mysql_query("UPDATE category SET views = views + 1 WHERE id='".$cat."'");
   $info = mysql_fetch_array($query);
   $q = mysql_query($info['query']);
   // $q = mysql_query("SELECT name,image_url FROM faces");
   echo '<hr>';
-  echo '<div class="well"><h1>Vote for '.$info['name'].'</h1></div>';
+  echo '<div class="well"><h1>Vote for '.$info['name'].'</h1><a target="_blank" class="btn btn-primary" href="https://www.facebook.com/sharer/sharer.php?u=brainstrom.zz.mu/whois/votes.php?cat='.$_POST['cat'].'">Share On Facebook</a></div>';
   echo '<hr>';
   for($i=0;$i<mysql_num_rows($q);$i++){
     $items = mysql_fetch_array($q);
@@ -20,7 +21,7 @@ if ($_POST['cat']) {
               <img style="width: 100%; text-align: center;" src="'.$items['image_url'].'" alt="">
             </div>
             <div style="text-align: center;" class="col-md-7">
-              <h1>'.$items['name'].'</h1>
+              <a href="profile.php?name='.$items['name'].'"><h1>'.$items['name'].'</h1></a>
               <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="'.$items[$cat].'" aria-valuemin="'.$items[$cat].'" aria-valuemax="100" style="width: '.$items[$cat].'%;">
                   '.$items[$cat].' votes

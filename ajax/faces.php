@@ -9,10 +9,10 @@ if ($last == 0) {
 echo "<hr><h1 class='well'>All faces (".$last.")<a href='addface.php'>  [ <span class='glyphicon glyphicon-plus'></span>Add face]</a></h1>";
 for ($i=0; $i < $last; $i++) {
 	$info = mysql_fetch_array($q);
-	if ($i % 3 == 0) {
+	if ($i % 2 == 0) {
 			echo '<div class="row">';
 	}
-	echo '<div class="col-md-4 well">';
+	echo '<div class="col-md-6 well">';
 	echo '<a href="profile.php?name='.$info['name'].'">
 			<div class="row center">
 				<div class="col-md-4">
@@ -24,7 +24,7 @@ for ($i=0; $i < $last; $i++) {
 			</div>
 		</a>';
 	echo '</div>';
-	if ($i % 3 == 2) {
+	if ($i % 2 == 1) {
 		echo '</div>';
 	}
 }

@@ -20,7 +20,7 @@
     <div class="navbar-wrapper">
       <div class="container">
 
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -34,6 +34,7 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="index.php">Home</a></li>
+                <li><a href="toppers.php">Toppers</a></li>
                 <li><a href="category.php">Categories</a></li>
                 <li><a href="faces.php">Faces</a></li>
                 <li><a href="contact.php">Contact</a></li>
@@ -105,28 +106,49 @@
 
     <div class="container marketing">
     <div class="row well">
-      <h1>Some Categories</h1>
-      <!-- Three columns of text below the carousel -->
+      <h1>Popular Categories</h1>
       <div class="row">
-      <?php // php for getting 3 categories for home page
-      require ('connection.php');
-      $q = mysql_query("SELECT id,name FROM category");
-      $last = mysql_num_rows($q);
-      $last = min($last,6);
-      if ($last == 0) {
-        die("No categories available, You can add one too.</h1><a class='btn btn-primary' href='addcategory.php'></a>");
-      }
-      // echo "<hr><h1 class='well'>All categories (".$last.")<a href='addcategory.php'>  [ <span class='glyphicon glyphicon-plus'></span>Add Category]</a></h1>";
-      echo '<div class="row">';
-      for ($i=0; $i < $last; $i++) {
-        $info = mysql_fetch_array($q);
-        echo '<div class="col-md-4 thumbnail">';
-        echo '<a href="votes.php?cat='.$info['id'].'"><div class="row center"><div class="col-md-4"><h1>'.($i+1).'</h1></div><div class="col-md-8"><h2>'.$info['name'].'</h2></div></div></a>';
+        <?php // php for getting 3 categories for home page popular
+        require ('connection.php');
+        $q = mysql_query("SELECT id,name FROM category ORDER BY views DESC");
+        $last = mysql_num_rows($q);
+        $last = min($last,3);
+        if ($last == 0) {
+          die("No categories available, You can add one too.</h1><a class='btn btn-primary' href='addcategory.php'></a>");
+        }
+        // echo "<hr><h1 class='well'>All categories (".$last.")<a href='addcategory.php'>  [ <span class='glyphicon glyphicon-plus'></span>Add Category]</a></h1>";
+        echo '<div class="row">';
+        for ($i=0; $i < $last; $i++) {
+          $info = mysql_fetch_array($q);
+          echo '<div class="col-md-4 thumbnail">';
+          echo '<a href="votes.php?cat='.$info['id'].'"><div class="row center"><div class="col-md-4"><h1>'.($i+1).'</h1></div><div class="col-md-8"><h2>'.$info['name'].'</h2></div></div></a>';
+          echo '</div>';
+        }
         echo '</div>';
-      }
-      echo '</div>';
-      ?>
-      <a href="categoty.php" class="btn btn-primary" style="width: 100%;">Show All</a>
+        ?>
+        <a href="category.php?order=views" class="btn btn-primary" style="width: 100%;">Show All</a>
+      </div> <!-- /well -->
+
+      <h1>New Categories</h1>
+      <div class="row">
+        <?php // php for getting 3 categories for home page newest
+        $q = mysql_query("SELECT id,name FROM category ORDER BY created DESC");
+        $last = mysql_num_rows($q);
+        $last = min($last,3);
+        if ($last == 0) {
+          die("No categories available, You can add one too.</h1><a class='btn btn-primary' href='addcategory.php'></a>");
+        }
+        // echo "<hr><h1 class='well'>All categories (".$last.")<a href='addcategory.php'>  [ <span class='glyphicon glyphicon-plus'></span>Add Category]</a></h1>";
+        echo '<div class="row">';
+        for ($i=0; $i < $last; $i++) {
+          $info = mysql_fetch_array($q);
+          echo '<div class="col-md-4 thumbnail">';
+          echo '<a href="votes.php?cat='.$info['id'].'"><div class="row center"><div class="col-md-4"><h1>'.($i+1).'</h1></div><div class="col-md-8"><h2>'.$info['name'].'</h2></div></div></a>';
+          echo '</div>';
+        }
+        echo '</div>';
+        ?>
+        <a href="category.php?order=created" class="btn btn-primary" style="width: 100%;">Show All</a>
       </div> <!-- /well -->
     </div><!-- /.row -->
 
@@ -145,7 +167,7 @@
           echo '<div class="row featurette well">
               <div class="col-md-8">
                 <h2 class="featurette-heading">'.$finfo['name'].'<span class="text-muted"> Is Best In '.$info['name'].'</span></h2>
-                <a class="btn btn-primary" href="votes.php?cat='.$info['id'].'">Vote Here</a>
+                <a class="btn btn-primary full-width" href="votes.php?cat='.$info['id'].'">Vote Here</a>
               </div>
               <div class="col-md-4">
                 <img style="width: 100%; height: 100%;" class="featurette-image img-responsive" src="'.$finfo['image_url'].'" alt="">
@@ -158,7 +180,7 @@
               </div>
               <div class="col-md-8">
                 <h2 class="featurette-heading">'.$finfo['name'].'<span class="text-muted"> Is Best In '.$info['name'].'</span></h2>
-                <a class="btn btn-primary" href="votes.php?cat='.$info['id'].'">Vote Here</a>
+                <a class="btn btn-primary full-width" href="votes.php?cat='.$info['id'].'">Vote Here</a>
               </div>
             </div>';
         }
