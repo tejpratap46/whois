@@ -2,7 +2,7 @@
 <?php
 error_reporting(0);
 require ('connection.php');
-if ($_POST['name'] && $_POST['gender'] && $_POST['image']) {
+if ($_POST['name'] && strlen($_POST['gender']) > 0 && $_POST['image']) {
   $up = mysql_query("UPDATE `faces` SET `name`='".$_POST['name']."',`gender`='".$_POST['gender']."',`image_url`='".$_POST['image']."' WHERE name='".$_GET['name']."'");
   if ($up) {
     header('Location: profile.php?name='.$_POST['name']);

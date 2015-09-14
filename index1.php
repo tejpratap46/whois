@@ -156,7 +156,7 @@
       <!-- START THE FEATURETTES -->
 
       <?php
-      $q = mysql_query("SELECT id,name,query FROM category ORDER BY created DESC");
+      $q = mysql_query("SELECT id,name,query FROM category");
       $last = mysql_num_rows($q);
       $last = min($last,6);
       for ($i=0; $i < $last; $i++) {

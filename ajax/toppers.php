@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 require '../connection.php';
-$q = mysql_query("SELECT id,name,query FROM category");
+$q = mysql_query("SELECT id,name,query FROM category ORDER BY created DESC");
 $last = mysql_num_rows($q);
 echo "<hr>";
 for ($i=0; $i < $last; $i++) {
